@@ -28,6 +28,7 @@ install_ruby() {
  log_function $FUNCNAME
  gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
  curl -L get.rvm.io | bash -s stable
+ source /etc/profile.d/rvm.sh
  /usr/local/rvm/bin/rvm pkg install zlib
  /usr/local/rvm/bin/rvm reinstall all --force
  /usr/local/rvm/bin/rvm install ruby-${RUBY_VERSION}
