@@ -24,16 +24,11 @@ reset() {
 }
 
 ## install ruby installer, rvm
-install_ruby() {
+install_rvm() {
  log_function $FUNCNAME
  gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
  curl -L get.rvm.io | bash -s stable
- source /etc/profile.d/rvm.sh
- /usr/local/rvm/bin/rvm pkg install zlib
- /usr/local/rvm/bin/rvm reinstall all --force
- /usr/local/rvm/bin/rvm install ruby-${RUBY_VERSION}
 }
-
 
 # install modules required for puppet/ruby
 install_puppet() {
@@ -44,13 +39,10 @@ install_puppet() {
 }
 
 reset
-install_ruby
-
-## source_ruby
-[[ -s /usr/local/rvm/scripts/rvm ]] && source /usr/local/rvm/scripts/rvm
-# restart shell
-exec $SHELL -l
+install_rvm
+source /etc/profile.d/rvm.sh
+rvm autolibs enable
+rvm install ruby-${RUBY_VERSION}
 rvm use ${RUBY_VERSION} --default
-
-#install_puppet
+install_puppet
 
