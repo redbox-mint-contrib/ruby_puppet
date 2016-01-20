@@ -40,7 +40,6 @@ install_puppet() {
  yum install -y augeas-libs augeas-devel compat-readline5 libselinux-ruby git
  gem install ruby-augeas bundler
  gem install puppet -v ${PUPPET_VERSION}
- test -h /usr/bin/puppet || ln -s `which puppet` /usr/bin/puppet
 }
 
 reset
@@ -50,5 +49,5 @@ install_ruby
 [[ -s /usr/local/rvm/scripts/rvm ]] && source /usr/local/rvm/scripts/rvm
 rvm use ${RUBY_VERSION} --default
 
-install_puppet
+#install_puppet
 
