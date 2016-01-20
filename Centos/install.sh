@@ -42,7 +42,7 @@ reset
 install_rvm
 
 #setup and reload rvm
-source /etc/profile.d/rvm.sh
+source /usr/local/rvm/scripts/rvm
 rvm autolibs enable
 rvm install ruby-${RUBY_VERSION}
 rvm use ${RUBY_VERSION} --default
