@@ -40,6 +40,8 @@ install_puppet() {
 
 reset
 install_rvm
+
+#setup and reload rvm
 source /etc/profile.d/rvm.sh
 rvm autolibs enable
 rvm install ruby-${RUBY_VERSION}
