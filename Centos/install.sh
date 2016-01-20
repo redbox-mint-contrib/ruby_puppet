@@ -35,8 +35,8 @@ install_rvm() {
 install_puppet() {
  log_function $FUNCNAME
  yum install -y augeas-libs augeas-devel compat-readline5 libselinux-ruby git
- gem install ruby-augeas bundler
- gem install puppet -v ${PUPPET_VERSION}
+ gem install ruby-augeas bundler || bash -l -c "gem install ruby-augeas bundler"
+ gem install puppet -v ${PUPPET_VERSION} || bash -l -c "gem install puppet -v ${PUPPET_VERSION}"
 }
 
 reset
