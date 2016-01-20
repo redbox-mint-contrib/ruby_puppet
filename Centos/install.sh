@@ -25,9 +25,10 @@ reset() {
 
 ## install ruby installer, rvm
 install_rvm() {
+ yum -y install which tar
  log_function $FUNCNAME
  gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
- curl -L get.rvm.io | rvm_tar_command=gtar bash -s stable
+ curl -L get.rvm.io | bash -s stable
 }
 
 # install modules required for puppet/ruby
@@ -42,7 +43,7 @@ reset
 install_rvm
 
 #setup and reload rvm
-bash /usr/local/rvm/scripts/rvm
+bash /etc/profile.d/rvm.sh
 rvm autolibs enable
 rvm install ruby-${RUBY_VERSION}
 rvm use ${RUBY_VERSION} --default
