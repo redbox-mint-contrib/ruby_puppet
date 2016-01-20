@@ -47,6 +47,7 @@ bash /etc/profile.d/rvm.sh
 /usr/local/rvm/bin/rvm autolibs enable
 /usr/local/rvm/bin/rvm install ruby-${RUBY_VERSION}
 /usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
+bash -l -c "rvm use use ${RUBY_VERSION} --default"
 echo "ruby install completed"
 install_puppet
 
