@@ -27,7 +27,7 @@ reset() {
 install_rvm() {
  log_function $FUNCNAME
  gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
- curl -L get.rvm.io | bash -s stable
+ curl -L get.rvm.io | rvm_tar_command=gtar bash -s stable
 }
 
 # install modules required for puppet/ruby
