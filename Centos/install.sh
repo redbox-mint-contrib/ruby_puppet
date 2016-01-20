@@ -47,6 +47,8 @@ install_ruby
 
 ## source_ruby
 [[ -s /usr/local/rvm/scripts/rvm ]] && source /usr/local/rvm/scripts/rvm
+# restart shell
+exec $SHELL -l
 rvm use ${RUBY_VERSION} --default
 
 #install_puppet
