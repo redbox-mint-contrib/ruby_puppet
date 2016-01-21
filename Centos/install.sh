@@ -46,22 +46,27 @@ install_puppet() {
  gem install puppet -v ${PUPPET_VERSION}
 }
 
+addToPath() {
+	for p in $*; do
+	  echo $PATH | grep -q $p || echo "adding $p/bin to PATH..." && export PATH="${PATH}:$p/bin"
+	  grep -q $p /root/.bashrc || echo "updating PATH with $p" && echo "export PATH=\$PATH:$p/bin" >> /root/.bashrc 
+	done
+}
+
 reset
 install_rvm
 
 # setup and load rvm
 bash /etc/profile.d/rvm.sh
-/usr/local/rvm/bin/rvm autolibs enable
-
-## make rvm immediately available to login shell
-grep "rvm" /root/.bashrc || /etc/bash.bashrc >> /root/.bashrc
+addToPath '/usr/local/rvm/bin'
 
 install_ruby
-/usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
+addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
+#/usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
 ## validate ruby installation
-rvm --version || echo "could not find rvm" && exit 1
-ruby --version || echo "could not find ruby" && exit 1
-gem --version || die "could not find gem" && exit 1
-echo "ruby install completed"
+#rvm --version || echo "could not find rvm" && exit 1
+#ruby --version || echo "could not find ruby" && exit 1
+#gem --version || echo "could not find gem" && exit 1
+#echo "ruby install completed"
 install_puppet
 
