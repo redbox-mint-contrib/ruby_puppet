@@ -59,9 +59,9 @@ grep "rvm" /root/.bashrc || /etc/bash.bashrc >> /root/.bashrc
 install_ruby
 /usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
 ## validate ruby installation
-rvm --version || die "could not find rvm"
-ruby --version || die "could not find ruby"
-gem --version || die "could not find gem"
+rvm --version || echo "could not find rvm" && exit 1
+ruby --version || echo "could not find ruby" && exit 1
+gem --version || die "could not find gem" && exit 1
 echo "ruby install completed"
 install_puppet
 
