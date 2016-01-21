@@ -31,24 +31,37 @@ install_rvm() {
  curl -L get.rvm.io | bash -s stable --auto-dotfiles
 }
 
+install_ruby() {
+ # zlib require for libyaml (not picked up otherwise by ruby install with autolibs)
+ /usr/local/rvm/bin/rvm pkg install zlib
+ /usr/local/rvm/bin/rvm reinstall all --force
+ /usr/local/rvm/bin/rvm install ruby-${RUBY_VERSION}
+}
+
 # install modules required for puppet/ruby
 install_puppet() {
  log_function $FUNCNAME
  yum install -y augeas-libs augeas-devel compat-readline5 libselinux-ruby git
- gem install ruby-augeas bundler || bash -l -c "gem install ruby-augeas bundler"
- gem install puppet -v ${PUPPET_VERSION} || bash -l -c "gem install puppet -v ${PUPPET_VERSION}"
+ gem install ruby-augeas bundler
+ gem install puppet -v ${PUPPET_VERSION}
 }
 
 reset
 install_rvm
 
-#setup and reload rvm
+# setup and load rvm
 bash /etc/profile.d/rvm.sh
 /usr/local/rvm/bin/rvm autolibs enable
-/usr/local/rvm/bin/rvm install ruby-${RUBY_VERSION}
+
+## make rvm immediately available to login shell
+grep "rvm" /root/.bashrc || /etc/bash.bashrc >> /root/.bashrc
+
+install_ruby
 /usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
-cat /etc/bash.bashrc >> /root/.bashrc
-bash -l -c "rvm use use ${RUBY_VERSION} --default"
+## validate ruby installation
+rvm --version || die "could not find rvm"
+ruby --version || die "could not find ruby"
+gem --version || die "could not find gem"
 echo "ruby install completed"
 install_puppet
 
