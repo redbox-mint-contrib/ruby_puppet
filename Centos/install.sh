@@ -62,7 +62,6 @@ addToPath '/usr/local/rvm/bin'
 
 install_ruby
 addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
-#/usr/local/rvm/bin/rvm use ${RUBY_VERSION} --default
 echo "ruby install completed"
 install_puppet
 
