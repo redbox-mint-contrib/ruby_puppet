@@ -58,7 +58,7 @@ install_rvm
 
 # setup and load rvm
 bash /etc/profile.d/rvm.sh
-addToPath '/usr/local/rvm/bin'
+addToPath '/usr/local/rvm'
 
 install_ruby
 addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
