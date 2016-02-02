@@ -6,7 +6,7 @@
 #    PUPPET_VERSION
 # e.g., export RUBY_VERSION=2.0.0-p598
 # e.g., export PUPPET_VERSION=3.8.4
-#  tested on Centos 6.7 x86_64
+#  tested on Centos 6.7 x86_64 and Centos 7.2.1511 x86_64
 #
 usage() {
 	if [ `whoami` != 'root' ]; 
@@ -72,4 +72,6 @@ install_ruby
 addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
 echo "ruby install completed"
 install_puppet
+echo "puppet install completed"
+echo "Installation complete. To activate ruby (and puppet), either log out/in, or `source /root/.bashrc`"
 
