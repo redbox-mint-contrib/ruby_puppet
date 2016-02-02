@@ -4,7 +4,9 @@
 # usage requires creation of variables:
 #    RUBY_VERSION
 #    PUPPET_VERSION
-#  tested on Centos 6.5 x86_64
+# e.g., export RUBY_VERSION=2.0.0-p598
+# e.g., export PUPPET_VERSION=3.8.4
+#  tested on Centos 6.7 x86_64
 #
 usage() {
 	if [ `whoami` != 'root' ]; 
@@ -12,6 +14,12 @@ usage() {
 	fi
 }
 usage
+
+echo "running this script requires RUBY_VERSION and PUPPET_VERSION variables set."
+echo "Trying ruby version..."
+[ -z $RUBY_VERSION ] && exit 1
+echo "Trying puppet version..."
+[ -z $PUPPET_VERSION ] && exit 1
 
 log_function() {
  printf  -- "At function: %s...\n" $1
