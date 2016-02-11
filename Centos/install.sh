@@ -73,5 +73,5 @@ addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
 echo "ruby install completed"
 install_puppet
 echo "puppet install completed"
-echo "Installation complete. To activate ruby (and puppet), either log out/in, or `source /root/.bashrc`"
+echo "Installation complete. To activate ruby (and puppet), either log out/in, or source /root/.bashrc"
 
