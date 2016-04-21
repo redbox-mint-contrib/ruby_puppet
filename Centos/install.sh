@@ -35,7 +35,8 @@ reset() {
 install_rvm() {
  yum -y install which tar
  log_function $FUNCNAME
- gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+ #gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+ curl -sSL https://rvm.io/mpapis.asc | sudo gpg2 --import -
  curl -L get.rvm.io | bash -s stable --auto-dotfiles
 }
 
@@ -73,8 +74,14 @@ addToPath "/usr/local/rvm/rubies/ruby-${RUBY_VERSION}"
 echo "ruby install completed"
 install_puppet
 echo "puppet install completed"
-echo "Installation complete. To activate ruby (and puppet), either log out/in, or source /root/.bashrc"
+echo "To activate ruby (and puppet), either log out/in, or source /root/.bashrc"
 
 ## add all installed rubies to root path (so available immediately)
+echo "Testing ruby installation present..."
+[ ! -d /usr/local/rvm/rubies/ruby-${RUBY_VERSION} ] && exit 1
+
+echo "Setting up immediate path to installed rubies..."
 ln -s /usr/local/rvm/rubies/ruby-${RUBY_VERSION}/bin/* /usr/bin/
+
+echo "Installation complete."
 
