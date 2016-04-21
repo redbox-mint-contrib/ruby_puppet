@@ -75,3 +75,6 @@ install_puppet
 echo "puppet install completed"
 echo "Installation complete. To activate ruby (and puppet), either log out/in, or source /root/.bashrc"
 
+## add all installed rubies to root path (so available immediately)
+ln -s /usr/local/rvm/rubies/ruby-${RUBY_VERSION}/bin/* /usr/bin/
+
