@@ -28,6 +28,13 @@ log_function() {
 ## remove any existing yum installation
 reset() {
  log_function $FUNCNAME
+ ## 22/06/2016: Removed the non-functional base repos that have broken mirrors
+ mkdir -p /etc/yum.repos.d/disabled
+ mv /etc/yum.repos.d/CentOS-* /etc/yum.repos.d/disabled/
+ yum install yum-plugin-fastestmirror
+ yum clean all
+ yum update
+ # now continue with the reste
  yum remove -y ruby facter puppet libyaml
 }
 
